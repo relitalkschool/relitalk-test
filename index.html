@@ -11,7 +11,7 @@
   @font-face{font-family:'Forma';font-weight:700;src:url('fonts/FormaDJRCyrillicText-Bold-Testing.ttf');}
   :root{--pink:#FF015A;--pinkd:#D6004E;--purple:#6B04EC;--yellow:#FFE800;--ink:#16131c;--muted:#615b6e;--line:#ece7f3;--soft:#faf8fd;--grad:linear-gradient(95deg,var(--pink),var(--purple));}
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Forma',-apple-system,Arial,sans-serif;color:var(--ink);background:#f4f0fa;font-size:16px;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{font-family:'Forma',-apple-system,Arial,sans-serif;color:var(--ink);background:#f4f0fa;font-size:16px;line-height:1.55;overflow-x:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .wrap{max-width:680px;margin:0 auto;padding:24px 18px 60px;}
   .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px;margin-bottom:16px;box-shadow:0 8px 26px rgba(20,10,40,.05);}
   .brand{display:flex;align-items:baseline;gap:2px;font-weight:700;font-size:20px;justify-content:center;margin-bottom:6px;}
@@ -60,6 +60,7 @@
   .sell p{font-size:15px;}
   .artlink{display:inline-block;margin-top:14px;font-weight:700;color:var(--purple);border:1.5px solid #e0d3f5;border-radius:999px;padding:11px 20px;font-size:15px;text-decoration:none;}
   .artlink:hover{border-color:var(--purple);background:#f6f1ff;}
+  @media (max-width:480px){ h1{font-size:22px;} .wrap{padding:18px 14px 80px;} .card{padding:20px 18px;} .badges{gap:6px;} .badge{font-size:12px;padding:5px 11px;} }
 </style>
 </head>
 <body>
