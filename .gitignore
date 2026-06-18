@@ -1,0 +1,4 @@
+# Не для деплоя
+*.png
+SPEC_test.md
+.DS_Store

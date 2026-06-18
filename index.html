@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relitalk — тест уровня английского</title>
+<style>
+  @font-face{font-family:'Forma';font-weight:300;src:url('fonts/FormaDJRCyrillicText-Light-Testing.ttf');}
+  @font-face{font-family:'Forma';font-weight:400;src:url('fonts/FormaDJRCyrillicText-Regular-Testing.ttf');}
+  @font-face{font-family:'Forma';font-weight:500;src:url('fonts/FormaDJRCyrillicText-Medium-Testing.ttf');}
+  @font-face{font-family:'Forma';font-weight:700;src:url('fonts/FormaDJRCyrillicText-Bold-Testing.ttf');}
+  :root{--pink:#FF015A;--pinkd:#D6004E;--purple:#6B04EC;--yellow:#FFE800;--ink:#16131c;--muted:#615b6e;--line:#ece7f3;--soft:#faf8fd;--grad:linear-gradient(95deg,var(--pink),var(--purple));}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Forma',-apple-system,Arial,sans-serif;color:var(--ink);background:#f4f0fa;font-size:16px;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .wrap{max-width:680px;margin:0 auto;padding:24px 18px 60px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px;margin-bottom:16px;box-shadow:0 8px 26px rgba(20,10,40,.05);}
+  .brand{display:flex;align-items:baseline;gap:2px;font-weight:700;font-size:20px;justify-content:center;margin-bottom:6px;}
+  .brand .t{color:var(--purple);} .brand .d{width:6px;height:6px;border-radius:50%;background:var(--yellow);}
+  h1{font-size:27px;font-weight:700;text-align:center;letter-spacing:-.02em;margin-bottom:8px;}
+  .lead{text-align:center;color:var(--muted);font-size:15px;}
+  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+  .badge{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;}
+  .kicker{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pinkd);margin-bottom:4px;}
+  .q{margin:18px 0;}
+  .q .qt{font-weight:600;margin-bottom:9px;}
+  .q .en{font-family:Georgia,serif;}
+  .opts label{display:block;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:.12s;font-size:15px;}
+  .opts label:hover{border-color:#d9c9f3;background:#fbfaff;}
+  .opts input{margin-right:9px;}
+  .opts input:checked + span{font-weight:600;}
+  .opts label:has(input:checked){border-color:var(--purple);background:#f6f1ff;}
+  input[type=text],input[type=tel]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font-family:inherit;font-size:16px;margin-top:6px;}
+  .read{background:var(--soft);border-left:4px solid var(--purple);border-radius:0 12px 12px 0;padding:14px 16px;font-family:Georgia,serif;margin:10px 0 4px;}
+  .btn{display:block;width:100%;font-weight:700;font-size:17px;color:#fff;background:var(--grad);border:none;border-radius:999px;padding:17px;cursor:pointer;margin-top:10px;box-shadow:0 12px 28px rgba(255,1,90,.28);}
+  .btn:hover{transform:translateY(-1px);}
+  .err{color:var(--pinkd);font-size:14px;text-align:center;margin-top:10px;display:none;}
+  .sec-title{font-size:19px;font-weight:700;margin:4px 0 2px;}
+  .hint{color:var(--muted);font-size:13.5px;margin-bottom:6px;}
+  .check label{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:15px;cursor:pointer;}
+  /* result */
+  #result{display:none;}
+  .lvl{background:var(--grad);color:#fff;border-radius:20px;padding:28px;text-align:center;}
+  .lvl .big{font-size:40px;font-weight:700;line-height:1.1;}
+  .lvl .nm{font-size:18px;opacity:.95;margin-top:4px;}
+  .lvl .sc{margin-top:12px;font-size:15px;opacity:.9;}
+  .bars{margin:18px 0;}
+  .bar{margin-bottom:12px;}
+  .bar .l{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:5px;}
+  .bar .track{height:9px;background:var(--soft);border-radius:9px;overflow:hidden;}
+  .bar .fill{height:100%;background:var(--grad);border-radius:9px;}
+  .reco{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:15px;}
+  .note{text-align:center;color:var(--muted);font-size:14px;margin-top:16px;}
+  .insight{background:linear-gradient(110deg,#fdeff7,#f1ecfd);border:1px solid #efe2f7;border-radius:16px;padding:15px 18px;margin-bottom:16px;font-size:15px;line-height:1.5;}
+  .insight b{color:var(--purple);}
+  .tip{display:flex;gap:10px;align-items:flex-start;background:#fbf7ff;border:1px solid #efe6fb;border-left:3px solid var(--pink);border-radius:10px;padding:10px 13px;margin:16px 0;font-size:14px;line-height:1.45;color:#3c3648;}
+  .tip .e{font-size:17px;flex-shrink:0;line-height:1.3;}
+  .tip b{color:var(--purple);}
+  .sell{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:16px;}
+  .sell h3{font-size:18px;font-weight:700;margin-bottom:8px;}
+  .sell p{font-size:15px;}
+  .artlink{display:inline-block;margin-top:14px;font-weight:700;color:var(--purple);border:1.5px solid #e0d3f5;border-radius:999px;padding:11px 20px;font-size:15px;text-decoration:none;}
+  .artlink:hover{border-color:var(--purple);background:#f6f1ff;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- INTRO -->
+  <div class="card" style="text-align:center;">
+    <div class="brand"><span>reli</span><span class="t">talk</span><span class="d"></span></div>
+    <h1>Тест уровня английского</h1>
+    <p class="lead">Пройдите его <b>до пробного урока</b> — методолог подготовит персональный план именно под ваш уровень и цель.</p>
+    <div class="badges"><span class="badge">⏱ 5–7 минут</span><span class="badge">📊 уровень + разбор</span><span class="badge">🎯 для пробного урока</span></div>
+  </div>
+
+  <form id="test">
+
+  <!-- КОНТАКТ -->
+  <div class="card">
+    <div class="kicker">Шаг 1 · о вас</div>
+    <div class="q"><div class="qt">Как вас зовут?</div><input type="text" name="name" required placeholder="Имя"></div>
+    <div class="q"><div class="qt">Телефон (как в заявке)</div><input type="tel" name="phone" required placeholder="+7 ___ ___ __ __"></div>
+    <div class="q"><div class="qt">Зачем вам английский? (можно несколько)</div>
+      <div class="check">
+        <label><input type="checkbox" name="goal" value="Путешествия"> <span>Путешествия</span></label>
+        <label><input type="checkbox" name="goal" value="Работа/карьера"> <span>Работа, карьера</span></label>
+        <label><input type="checkbox" name="goal" value="Переезд"> <span>Переезд за рубеж</span></label>
+        <label><input type="checkbox" name="goal" value="Для себя/саморазвитие"> <span>Для себя, саморазвитие</span></label>
+        <label><input type="checkbox" name="goal" value="Помочь детям"> <span>Помогать детям</span></label>
+      </div>
+    </div>
+    <div class="q"><div class="qt">Сколько минут в день готовы заниматься?</div>
+      <div class="opts" data-self>
+        <label><input type="radio" name="time" value="15–20 мин"><span>15–20 минут</span></label>
+        <label><input type="radio" name="time" value="30–40 мин"><span>30–40 минут</span></label>
+        <label><input type="radio" name="time" value="час и больше"><span>Час и больше</span></label>
+      </div>
+    </div>
+    <div class="q"><div class="qt">Ваш опыт с английским?</div>
+      <div class="opts" data-self>
+        <label><input type="radio" name="exp" value="с нуля"><span>Практически с нуля</span></label>
+        <label><input type="radio" name="exp" value="учил, забыл"><span>Учил(а) когда-то, многое забыл(а)</span></label>
+        <label><input type="radio" name="exp" value="базовый есть"><span>Базовый уровень есть</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip"><span class="e">💡</span><div>Учили английский и не заговорили? <b>Дело не в способностях, а в формате.</b> Главный враг английского — не сложность, а то, что мы бросаем. Лучший метод — тот, который вы реально продолжите.</div></div>
+
+  <!-- СЛОВАРНЫЙ ЗАПАС -->
+  <div class="card">
+    <div class="kicker">Шаг 2 · Vocabulary · словарный запас</div>
+    <div class="hint">Выберите правильный вариант.</div>
+    <div class="q"><div class="qt">1. «<span class="en">apple</span>» — это…</div><div class="opts" data-q="q1"><label><input type="radio" name="q1" value="a"><span>стол</span></label><label><input type="radio" name="q1" value="b"><span>яблоко</span></label><label><input type="radio" name="q1" value="c"><span>вода</span></label><label><input type="radio" name="q1" value="d"><span>собака</span></label></div></div>
+    <div class="q"><div class="qt">2. «<span class="en">to buy</span>» — это…</div><div class="opts" data-q="q2"><label><input type="radio" name="q2" value="a"><span>продавать</span></label><label><input type="radio" name="q2" value="b"><span>читать</span></label><label><input type="radio" name="q2" value="c"><span>покупать</span></label><label><input type="radio" name="q2" value="d"><span>готовить</span></label></div></div>
+    <div class="tip"><span class="e">⏱</span><div>С репетитором 2–3 раза в неделю заговорить почти невозможно — вы говорите 5 минут из часа. <b>Язык ставится практикой</b>, а не зубрёжкой.</div></div>
+    <div class="q"><div class="qt">3. Какое слово означает «счастливый»?</div><div class="opts" data-q="q3"><label><input type="radio" name="q3" value="a"><span>hungry</span></label><label><input type="radio" name="q3" value="b"><span>angry</span></label><label><input type="radio" name="q3" value="c"><span>happy</span></label><label><input type="radio" name="q3" value="d"><span>tired</span></label></div></div>
+    <div class="q"><div class="qt">4. Слово, противоположное «<span class="en">expensive</span>» (дорогой):</div><div class="opts" data-q="q4"><label><input type="radio" name="q4" value="a"><span>big</span></label><label><input type="radio" name="q4" value="b"><span>cheap</span></label><label><input type="radio" name="q4" value="c"><span>new</span></label><label><input type="radio" name="q4" value="d"><span>fast</span></label></div></div>
+    <div class="q"><div class="qt">5. «<span class="en">to improve</span>» означает…</div><div class="opts" data-q="q5"><label><input type="radio" name="q5" value="a"><span>забывать</span></label><label><input type="radio" name="q5" value="b"><span>ухудшать</span></label><label><input type="radio" name="q5" value="c"><span>повторять</span></label><label><input type="radio" name="q5" value="d"><span>улучшать</span></label></div></div>
+  </div>
+
+  <!-- ГРАММАТИКА -->
+  <div class="card">
+    <div class="kicker">Шаг 3 · Grammar · грамматика</div>
+    <div class="hint">Выберите правильный вариант, чтобы предложение было верным.</div>
+    <div class="q"><div class="qt">6. <span class="en">I ___ a student.</span></div><div class="opts" data-q="q6"><label><input type="radio" name="q6" value="a"><span>is</span></label><label><input type="radio" name="q6" value="b"><span>am</span></label><label><input type="radio" name="q6" value="c"><span>are</span></label></div></div>
+    <div class="q"><div class="qt">7. <span class="en">She ___ coffee every morning.</span></div><div class="opts" data-q="q7"><label><input type="radio" name="q7" value="a"><span>drink</span></label><label><input type="radio" name="q7" value="b"><span>drinks</span></label><label><input type="radio" name="q7" value="c"><span>drinking</span></label></div></div>
+    <div class="tip"><span class="e">🌱</span><div>Ребёнок учит язык не за партой, а <b>погружением — каждый день понемногу</b> слушает, повторяет, говорит. Наш метод устроен так же: Read · Listen · Talk.</div></div>
+    <div class="q"><div class="qt">8. <span class="en">___ you like tea?</span></div><div class="opts" data-q="q8"><label><input type="radio" name="q8" value="a"><span>Do</span></label><label><input type="radio" name="q8" value="b"><span>Does</span></label><label><input type="radio" name="q8" value="c"><span>Are</span></label></div></div>
+    <div class="q"><div class="qt">9. <span class="en">They ___ to the cinema yesterday.</span></div><div class="opts" data-q="q9"><label><input type="radio" name="q9" value="a"><span>go</span></label><label><input type="radio" name="q9" value="b"><span>goes</span></label><label><input type="radio" name="q9" value="c"><span>went</span></label></div></div>
+    <div class="q"><div class="qt">10. <span class="en">There ___ some milk in the fridge.</span></div><div class="opts" data-q="q10"><label><input type="radio" name="q10" value="a"><span>is</span></label><label><input type="radio" name="q10" value="b"><span>are</span></label><label><input type="radio" name="q10" value="c"><span>am</span></label></div></div>
+    <div class="tip"><span class="e">🔁</span><div><b>Регулярность сильнее интенсивности:</b> 20–25 минут в день, которые вы не бросите, дадут больше, чем 2 часа в неделю, которые бросите через месяц.</div></div>
+    <div class="q"><div class="qt">11. <span class="en">She is taller ___ her brother.</span></div><div class="opts" data-q="q11"><label><input type="radio" name="q11" value="a"><span>then</span></label><label><input type="radio" name="q11" value="b"><span>that</span></label><label><input type="radio" name="q11" value="c"><span>than</span></label></div></div>
+    <div class="q"><div class="qt">12. <span class="en">I have lived here ___ 2018.</span></div><div class="opts" data-q="q12"><label><input type="radio" name="q12" value="a"><span>since</span></label><label><input type="radio" name="q12" value="b"><span>for</span></label><label><input type="radio" name="q12" value="c"><span>from</span></label></div></div>
+    <div class="q"><div class="qt">13. <span class="en">If it rains, we ___ at home.</span></div><div class="opts" data-q="q13"><label><input type="radio" name="q13" value="a"><span>stayed</span></label><label><input type="radio" name="q13" value="b"><span>will stay</span></label><label><input type="radio" name="q13" value="c"><span>stay</span></label></div></div>
+  </div>
+
+  <div class="tip"><span class="e">🗣</span><div><b>Главное — не идеальная грамматика, а смелость говорить.</b> С AI-репетитором не стыдно ошибаться — он не оценивает и доступен 24/7. Так уходит языковой барьер.</div></div>
+
+  <!-- ЧТЕНИЕ -->
+  <div class="card">
+    <div class="kicker">Шаг 4 · Reading · чтение</div>
+    <div class="hint">Прочитайте текст и ответьте на вопросы.</div>
+    <div class="read">Anna is from Spain, but she lives in London now. She works in a small coffee shop near her house. She likes her job because she meets a lot of people. In the evening, she studies English online for thirty minutes.</div>
+    <div class="q"><div class="qt">14. Where does Anna live now?</div><div class="opts" data-q="q14"><label><input type="radio" name="q14" value="a"><span>In Spain</span></label><label><input type="radio" name="q14" value="b"><span>In London</span></label><label><input type="radio" name="q14" value="c"><span>Near the sea</span></label></div></div>
+    <div class="q"><div class="qt">15. Why does she like her job?</div><div class="opts" data-q="q15"><label><input type="radio" name="q15" value="a"><span>It is easy</span></label><label><input type="radio" name="q15" value="b"><span>She meets a lot of people</span></label><label><input type="radio" name="q15" value="c"><span>It pays well</span></label></div></div>
+    <div class="q"><div class="qt">16. How long does she study English in the evening?</div><div class="opts" data-q="q16"><label><input type="radio" name="q16" value="a"><span>One hour</span></label><label><input type="radio" name="q16" value="b"><span>Ten minutes</span></label><label><input type="radio" name="q16" value="c"><span>Thirty minutes</span></label></div></div>
+  </div>
+
+  <!-- САМООЦЕНКА -->
+  <div class="card">
+    <div class="kicker">Шаг 5 · что вы уже умеете</div>
+    <div class="hint">Отметьте всё, что вы можете делать на английском (честно — это для диагноста).</div>
+    <div class="check">
+      <label><input type="checkbox" name="can" value="Представиться"> <span>Представиться: сказать имя, откуда я</span></label>
+      <label><input type="checkbox" name="can" value="Числа/дни"> <span>Назвать числа, дни недели, время</span></label>
+      <label><input type="checkbox" name="can" value="Кафе/магазин"> <span>Заказать еду в кафе или что-то купить</span></label>
+      <label><input type="checkbox" name="can" value="Рассказ о себе"> <span>Рассказать о себе 4–5 предложений</span></label>
+      <label><input type="checkbox" name="can" value="Простой диалог"> <span>Понять простой бытовой диалог на слух</span></label>
+      <label><input type="checkbox" name="can" value="Фильм с субтитрами"> <span>Смотреть фильм с английскими субтитрами</span></label>
+      <label><input type="checkbox" name="can" value="Поддержать разговор"> <span>Поддержать разговор 5 минут на бытовую тему</span></label>
+    </div>
+  </div>
+
+  <div class="tip"><span class="e">💜</span><div><b>С нуля — не поздно, в любом возрасте.</b> Наши ученицы начинали и в 40, и в 47 — и заговорили. Дело не в возрасте, а в системе.</div></div>
+  <div class="tip"><span class="e">✈️</span><div>Представьте: в поездке вы <b>сами</b> спрашиваете дорогу и понимаете ответ, знакомитесь с людьми — без переводчика. Английский открывает двери.</div></div>
+
+  <button type="submit" class="btn">Узнать свой уровень</button>
+  <div class="err" id="err">Пожалуйста, ответьте на все вопросы теста (шаги 2–4) и заполните имя и телефон.</div>
+  </form>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <div id="result">
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="lvl"><div class="big" id="rLevel">A1</div><div class="nm" id="rName">Начальный уровень</div><div class="sc" id="rScore">Правильных ответов: 0 из 16</div></div>
+      <div style="padding:24px 26px;">
+        <div class="kicker">Разбор по навыкам</div>
+        <div class="bars" id="rBars"></div>
+        <div class="reco" id="rReco"></div>
+        <div class="sell">
+          <h3>Хорошая новость: вы точно сможете 💜</h3>
+          <p>Ребёнок осваивает язык не за годы за партой, а <b>погружаясь в него каждый день</b> — слушая, повторяя, говоря. Взрослому не нужны годы — нужен правильный формат: <b>понемногу каждый день + живая практика речи</b>. Именно так устроен Relitalk: 20–25 минут в день и разговор с AI-репетитором без стеснения. С 2018 года так заговорили <b>более 12 000 человек</b>.</p>
+          <a class="artlink" id="artLink" href="#" target="_blank">📖 Как мы учим английский — читать статью</a>
+        </div>
+        <div class="note">✅ Ваш результат сохранён. Методолог изучит его <b>до пробного урока</b> и подготовит персональный план — как именно вам дойти до вашей цели и сколько на это нужно времени.<br><br><b>До встречи на пробном уроке!</b></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ===== Ключи ответов (16 заданий) =====
+  var KEY = {q1:'b',q2:'c',q3:'c',q4:'b',q5:'d',  q6:'b',q7:'b',q8:'a',q9:'c',q10:'a',q11:'c',q12:'a',q13:'b',  q14:'b',q15:'b',q16:'c'};
+  var SECTIONS = {Словарь:['q1','q2','q3','q4','q5'],Грамматика:['q6','q7','q8','q9','q10','q11','q12','q13'],Чтение:['q14','q15','q16']};
+
+  // TODO: для отправки результата диагносту вставьте сюда endpoint Google Apps Script / CRM (см. инструкцию)
+  var RESULT_ENDPOINT = "";
+
+  var form = document.getElementById('test');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    // проверка: имя, телефон и все 16 тест-вопросов отвечены
+    var ok = data.get('name') && data.get('phone');
+    for (var q in KEY){ if(!data.get(q)) ok=false; }
+    if(!ok){ document.getElementById('err').style.display='block'; return; }
+
+    var total=0, sec={};
+    for (var s in SECTIONS){ sec[s]=0; SECTIONS[s].forEach(function(q){ if(data.get(q)===KEY[q]){ sec[s]++; total++; } }); }
+
+    var lvl, nm, reco;
+    if(total<=4){ lvl='A0'; nm='Старт с нуля'; reco='Отличная новость: вы начинаете с чистого листа — а наша методика как раз сильна именно для старта с нуля. На пробном уроке методолог покажет, с чего начать, чтобы вы заговорили, а не «учили правила».'; }
+    else if(total<=7){ lvl='A1'; nm='Начальный (Elementary)'; reco='У вас есть база из отдельных слов и простых фраз. Дальше — системно собрать грамматику и, главное, разговорную практику. Методолог на пробном покажет, как закрыть пробелы и быстрее выйти на речь.'; }
+    else if(total<=11){ lvl='A2'; nm='Базовый (Pre-Intermediate)'; reco='Хорошая база! Вы понимаете простые тексты и строите предложения. Сейчас ключевое — разговорная беглость и аудирование. На пробном подберём план, чтобы вы «разговорились» и перестали стесняться.'; }
+    else { lvl='B1+'; nm='Средний (Intermediate)'; reco='Сильный результат! У вас уже уверенная база. Дальше — беглость, расширение словаря и свободный разговор на любые темы. Методолог покажет, как выйти на свободное общение.'; }
+
+    document.getElementById('rLevel').textContent=lvl;
+    document.getElementById('rName').textContent=nm;
+    document.getElementById('rScore').textContent='Правильных ответов: '+total+' из 16';
+    var bars=''; for(var s in SECTIONS){ var max=SECTIONS[s].length, pct=Math.round(sec[s]/max*100);
+      bars+='<div class="bar"><div class="l"><span>'+s+'</span><span>'+sec[s]+'/'+max+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%"></div></div></div>'; }
+    document.getElementById('rBars').innerHTML=bars;
+    document.getElementById('rReco').innerHTML='<b>Что дальше:</b> '+reco;
+
+    // отправка результата (если подключён endpoint)
+    if(RESULT_ENDPOINT){
+      var leadId=new URLSearchParams(location.search).get('lead_id')||'';
+      var payload={lead_id:leadId,name:data.get('name'),phone:data.get('phone'),level:lvl,score:total,sections:sec,
+        goal:data.getAll('goal').join(', '),time:data.get('time'),exp:data.get('exp'),can:data.getAll('can').join(', ')};
+      try{ fetch(RESULT_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }catch(e){}
+    }
+
+    document.getElementById('test').style.display='none';
+    var r=document.getElementById('result'); r.style.display='block';
+    r.scrollIntoView({behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
