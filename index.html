@@ -79,8 +79,6 @@
   <!-- КОНТАКТ -->
   <div class="card">
     <div class="kicker">Шаг 1 · о вас</div>
-    <div class="q"><div class="qt">Как вас зовут?</div><input type="text" name="name" required placeholder="Имя"></div>
-    <div class="q"><div class="qt">Телефон (как в заявке)</div><input type="tel" name="phone" required placeholder="+7 ___ ___ __ __"></div>
     <div class="q"><div class="qt">Зачем вам английский? (можно несколько)</div>
       <div class="check">
         <label><input type="checkbox" name="goal" value="Путешествия"> <span>Путешествия</span></label>
@@ -167,7 +165,7 @@
   <div class="tip"><span class="e">✈️</span><div>Представьте: в поездке вы <b>сами</b> спрашиваете дорогу и понимаете ответ, знакомитесь с людьми — без переводчика. Английский открывает двери.</div></div>
 
   <button type="submit" class="btn">Узнать свой уровень</button>
-  <div class="err" id="err">Пожалуйста, ответьте на все вопросы теста (шаги 2–4) и заполните имя и телефон.</div>
+  <div class="err" id="err">Пожалуйста, ответьте на все вопросы теста (шаги 2–4).</div>
   </form>
 
   <!-- РЕЗУЛЬТАТ -->
@@ -203,7 +201,7 @@
     e.preventDefault();
     var data = new FormData(form);
     // проверка: имя, телефон и все 16 тест-вопросов отвечены
-    var ok = data.get('name') && data.get('phone');
+    var ok = true;
     for (var q in KEY){ if(!data.get(q)) ok=false; }
     if(!ok){ document.getElementById('err').style.display='block'; return; }
 
@@ -227,7 +225,7 @@
     // отправка результата (если подключён endpoint)
     if(RESULT_ENDPOINT){
       var leadId=new URLSearchParams(location.search).get('lead_id')||'';
-      var payload={lead_id:leadId,name:data.get('name'),phone:data.get('phone'),level:lvl,score:total,sections:sec,
+      var payload={lead_id:leadId,level:lvl,score:total,sections:sec,
         goal:data.getAll('goal').join(', '),time:data.get('time'),exp:data.get('exp'),can:data.getAll('can').join(', ')};
       try{ fetch(RESULT_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }catch(e){}
     }
