@@ -20,12 +20,15 @@
   .lead{text-align:center;color:var(--muted);font-size:15px;}
   .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
   .badge{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;}
+  .guess{margin-top:16px;background:#fff6e9;border:1px solid #ffe0b3;border-radius:12px;padding:11px 15px;font-size:13.5px;line-height:1.45;color:#7a5a1e;text-align:left;}
+  .guess b{color:#a35a00;}
   .kicker{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pinkd);margin-bottom:4px;}
   .q{margin:18px 0;}
   .q .qt{font-weight:600;margin-bottom:9px;}
   .q .en{font-family:Georgia,serif;}
   .opts label{display:block;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:.12s;font-size:15px;}
   .opts label:hover{border-color:#d9c9f3;background:#fbfaff;}
+  .opts label.idk{color:var(--muted);border-style:dashed;}
   .opts input{margin-right:9px;}
   .opts input:checked + span{font-weight:600;}
   .opts label:has(input:checked){border-color:var(--purple);background:#f6f1ff;}
@@ -34,7 +37,6 @@
   .btn{display:block;width:100%;font-weight:700;font-size:17px;color:#fff;background:var(--grad);border:none;border-radius:999px;padding:17px;cursor:pointer;margin-top:10px;box-shadow:0 12px 28px rgba(255,1,90,.28);}
   .btn:hover{transform:translateY(-1px);}
   .err{color:var(--pinkd);font-size:14px;text-align:center;margin-top:10px;display:none;}
-  .sec-title{font-size:19px;font-weight:700;margin:4px 0 2px;}
   .hint{color:var(--muted);font-size:13.5px;margin-bottom:6px;}
   .check label{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:15px;cursor:pointer;}
   /* result */
@@ -50,8 +52,6 @@
   .bar .fill{height:100%;background:var(--grad);border-radius:9px;}
   .reco{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:15px;}
   .note{text-align:center;color:var(--muted);font-size:14px;margin-top:16px;}
-  .insight{background:linear-gradient(110deg,#fdeff7,#f1ecfd);border:1px solid #efe2f7;border-radius:16px;padding:15px 18px;margin-bottom:16px;font-size:15px;line-height:1.5;}
-  .insight b{color:var(--purple);}
   .tip{display:flex;gap:10px;align-items:flex-start;background:#fbf7ff;border:1px solid #efe6fb;border-left:3px solid var(--pink);border-radius:10px;padding:10px 13px;margin:16px 0;font-size:14px;line-height:1.45;color:#3c3648;}
   .tip .e{font-size:17px;flex-shrink:0;line-height:1.3;}
   .tip b{color:var(--purple);}
@@ -71,12 +71,13 @@
     <div class="brand"><span>reli</span><span class="t">talk</span><span class="d"></span></div>
     <h1>Тест уровня английского</h1>
     <p class="lead">Пройдите его <b>до пробного урока</b> — методолог подготовит персональный план именно под ваш уровень и цель.</p>
-    <div class="badges"><span class="badge">⏱ 5–7 минут</span><span class="badge">📊 уровень + разбор</span><span class="badge">🎯 для пробного урока</span></div>
+    <div class="badges"><span class="badge">⏱ 6–8 минут</span><span class="badge">📊 уровень + разбор</span><span class="badge">🎯 для пробного урока</span></div>
+    <div class="guess">⚠️ <b>Важно:</b> если не знаете ответ — <b>не угадывайте</b>, выбирайте «Я не знаю». Иначе тест покажет уровень, которого у вас нет, и план будет неточным. Честный ответ — точный результат.</div>
   </div>
 
   <form id="test">
 
-  <!-- КОНТАКТ -->
+  <!-- О ВАС -->
   <div class="card">
     <div class="kicker">Шаг 1 · о вас</div>
     <div class="q"><div class="qt">Зачем вам английский? (можно несколько)</div>
@@ -109,29 +110,32 @@
   <!-- СЛОВАРНЫЙ ЗАПАС -->
   <div class="card">
     <div class="kicker">Шаг 2 · Vocabulary · словарный запас</div>
-    <div class="hint">Выберите правильный вариант.</div>
-    <div class="q"><div class="qt">1. «<span class="en">apple</span>» — это…</div><div class="opts" data-q="q1"><label><input type="radio" name="q1" value="a"><span>стол</span></label><label><input type="radio" name="q1" value="b"><span>яблоко</span></label><label><input type="radio" name="q1" value="c"><span>вода</span></label><label><input type="radio" name="q1" value="d"><span>собака</span></label></div></div>
-    <div class="q"><div class="qt">2. «<span class="en">to buy</span>» — это…</div><div class="opts" data-q="q2"><label><input type="radio" name="q2" value="a"><span>продавать</span></label><label><input type="radio" name="q2" value="b"><span>читать</span></label><label><input type="radio" name="q2" value="c"><span>покупать</span></label><label><input type="radio" name="q2" value="d"><span>готовить</span></label></div></div>
+    <div class="hint">Выберите правильный вариант. Не знаете — выбирайте «Я не знаю», не угадывайте.</div>
+    <div class="q"><div class="qt">1. «<span class="en">apple</span>» — это…</div><div class="opts" data-q="q1"><label><input type="radio" name="q1" value="a"><span>стол</span></label><label><input type="radio" name="q1" value="b"><span>яблоко</span></label><label><input type="radio" name="q1" value="c"><span>вода</span></label><label><input type="radio" name="q1" value="d"><span>собака</span></label><label class="idk"><input type="radio" name="q1" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">2. «<span class="en">to buy</span>» — это…</div><div class="opts" data-q="q2"><label><input type="radio" name="q2" value="a"><span>продавать</span></label><label><input type="radio" name="q2" value="b"><span>читать</span></label><label><input type="radio" name="q2" value="c"><span>покупать</span></label><label><input type="radio" name="q2" value="d"><span>готовить</span></label><label class="idk"><input type="radio" name="q2" value="x"><span>Я не знаю</span></label></div></div>
     <div class="tip"><span class="e">⏱</span><div>С репетитором 2–3 раза в неделю заговорить почти невозможно — вы говорите 5 минут из часа. <b>Язык ставится практикой</b>, а не зубрёжкой.</div></div>
-    <div class="q"><div class="qt">3. Какое слово означает «счастливый»?</div><div class="opts" data-q="q3"><label><input type="radio" name="q3" value="a"><span>hungry</span></label><label><input type="radio" name="q3" value="b"><span>angry</span></label><label><input type="radio" name="q3" value="c"><span>happy</span></label><label><input type="radio" name="q3" value="d"><span>tired</span></label></div></div>
-    <div class="q"><div class="qt">4. Слово, противоположное «<span class="en">expensive</span>» (дорогой):</div><div class="opts" data-q="q4"><label><input type="radio" name="q4" value="a"><span>big</span></label><label><input type="radio" name="q4" value="b"><span>cheap</span></label><label><input type="radio" name="q4" value="c"><span>new</span></label><label><input type="radio" name="q4" value="d"><span>fast</span></label></div></div>
-    <div class="q"><div class="qt">5. «<span class="en">to improve</span>» означает…</div><div class="opts" data-q="q5"><label><input type="radio" name="q5" value="a"><span>забывать</span></label><label><input type="radio" name="q5" value="b"><span>ухудшать</span></label><label><input type="radio" name="q5" value="c"><span>повторять</span></label><label><input type="radio" name="q5" value="d"><span>улучшать</span></label></div></div>
+    <div class="q"><div class="qt">3. Какое слово означает «счастливый»?</div><div class="opts" data-q="q3"><label><input type="radio" name="q3" value="a"><span>hungry</span></label><label><input type="radio" name="q3" value="b"><span>angry</span></label><label><input type="radio" name="q3" value="c"><span>happy</span></label><label><input type="radio" name="q3" value="d"><span>tired</span></label><label class="idk"><input type="radio" name="q3" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">4. Слово, противоположное «<span class="en">expensive</span>» (дорогой):</div><div class="opts" data-q="q4"><label><input type="radio" name="q4" value="a"><span>big</span></label><label><input type="radio" name="q4" value="b"><span>cheap</span></label><label><input type="radio" name="q4" value="c"><span>new</span></label><label><input type="radio" name="q4" value="d"><span>fast</span></label><label class="idk"><input type="radio" name="q4" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">5. «<span class="en">to improve</span>» означает…</div><div class="opts" data-q="q5"><label><input type="radio" name="q5" value="a"><span>забывать</span></label><label><input type="radio" name="q5" value="b"><span>ухудшать</span></label><label><input type="radio" name="q5" value="c"><span>повторять</span></label><label><input type="radio" name="q5" value="d"><span>улучшать</span></label><label class="idk"><input type="radio" name="q5" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">6. «<span class="en">to achieve</span>» означает…</div><div class="opts" data-q="q17"><label><input type="radio" name="q17" value="a"><span>терять</span></label><label><input type="radio" name="q17" value="b"><span>достигать</span></label><label><input type="radio" name="q17" value="c"><span>избегать</span></label><label><input type="radio" name="q17" value="d"><span>пробовать</span></label><label class="idk"><input type="radio" name="q17" value="x"><span>Я не знаю</span></label></div></div>
   </div>
 
   <!-- ГРАММАТИКА -->
   <div class="card">
     <div class="kicker">Шаг 3 · Grammar · грамматика</div>
-    <div class="hint">Выберите правильный вариант, чтобы предложение было верным.</div>
-    <div class="q"><div class="qt">6. <span class="en">I ___ a student.</span></div><div class="opts" data-q="q6"><label><input type="radio" name="q6" value="a"><span>is</span></label><label><input type="radio" name="q6" value="b"><span>am</span></label><label><input type="radio" name="q6" value="c"><span>are</span></label></div></div>
-    <div class="q"><div class="qt">7. <span class="en">She ___ coffee every morning.</span></div><div class="opts" data-q="q7"><label><input type="radio" name="q7" value="a"><span>drink</span></label><label><input type="radio" name="q7" value="b"><span>drinks</span></label><label><input type="radio" name="q7" value="c"><span>drinking</span></label></div></div>
+    <div class="hint">Выберите правильный вариант. Не знаете — «Я не знаю», не угадывайте.</div>
+    <div class="q"><div class="qt">7. <span class="en">I ___ a student.</span></div><div class="opts" data-q="q6"><label><input type="radio" name="q6" value="a"><span>is</span></label><label><input type="radio" name="q6" value="b"><span>am</span></label><label><input type="radio" name="q6" value="c"><span>are</span></label><label class="idk"><input type="radio" name="q6" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">8. <span class="en">She ___ coffee every morning.</span></div><div class="opts" data-q="q7"><label><input type="radio" name="q7" value="a"><span>drink</span></label><label><input type="radio" name="q7" value="b"><span>drinks</span></label><label><input type="radio" name="q7" value="c"><span>drinking</span></label><label class="idk"><input type="radio" name="q7" value="x"><span>Я не знаю</span></label></div></div>
     <div class="tip"><span class="e">🌱</span><div>Ребёнок учит язык не за партой, а <b>погружением — каждый день понемногу</b> слушает, повторяет, говорит. Наш метод устроен так же: Read · Listen · Talk.</div></div>
-    <div class="q"><div class="qt">8. <span class="en">___ you like tea?</span></div><div class="opts" data-q="q8"><label><input type="radio" name="q8" value="a"><span>Do</span></label><label><input type="radio" name="q8" value="b"><span>Does</span></label><label><input type="radio" name="q8" value="c"><span>Are</span></label></div></div>
-    <div class="q"><div class="qt">9. <span class="en">They ___ to the cinema yesterday.</span></div><div class="opts" data-q="q9"><label><input type="radio" name="q9" value="a"><span>go</span></label><label><input type="radio" name="q9" value="b"><span>goes</span></label><label><input type="radio" name="q9" value="c"><span>went</span></label></div></div>
-    <div class="q"><div class="qt">10. <span class="en">There ___ some milk in the fridge.</span></div><div class="opts" data-q="q10"><label><input type="radio" name="q10" value="a"><span>is</span></label><label><input type="radio" name="q10" value="b"><span>are</span></label><label><input type="radio" name="q10" value="c"><span>am</span></label></div></div>
+    <div class="q"><div class="qt">9. <span class="en">___ you like tea?</span></div><div class="opts" data-q="q8"><label><input type="radio" name="q8" value="a"><span>Do</span></label><label><input type="radio" name="q8" value="b"><span>Does</span></label><label><input type="radio" name="q8" value="c"><span>Are</span></label><label class="idk"><input type="radio" name="q8" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">10. <span class="en">They ___ to the cinema yesterday.</span></div><div class="opts" data-q="q9"><label><input type="radio" name="q9" value="a"><span>go</span></label><label><input type="radio" name="q9" value="b"><span>goes</span></label><label><input type="radio" name="q9" value="c"><span>went</span></label><label class="idk"><input type="radio" name="q9" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">11. <span class="en">There ___ some milk in the fridge.</span></div><div class="opts" data-q="q10"><label><input type="radio" name="q10" value="a"><span>is</span></label><label><input type="radio" name="q10" value="b"><span>are</span></label><label><input type="radio" name="q10" value="c"><span>am</span></label><label class="idk"><input type="radio" name="q10" value="x"><span>Я не знаю</span></label></div></div>
     <div class="tip"><span class="e">🔁</span><div><b>Регулярность сильнее интенсивности:</b> 20–25 минут в день, которые вы не бросите, дадут больше, чем 2 часа в неделю, которые бросите через месяц.</div></div>
-    <div class="q"><div class="qt">11. <span class="en">She is taller ___ her brother.</span></div><div class="opts" data-q="q11"><label><input type="radio" name="q11" value="a"><span>then</span></label><label><input type="radio" name="q11" value="b"><span>that</span></label><label><input type="radio" name="q11" value="c"><span>than</span></label></div></div>
-    <div class="q"><div class="qt">12. <span class="en">I have lived here ___ 2018.</span></div><div class="opts" data-q="q12"><label><input type="radio" name="q12" value="a"><span>since</span></label><label><input type="radio" name="q12" value="b"><span>for</span></label><label><input type="radio" name="q12" value="c"><span>from</span></label></div></div>
-    <div class="q"><div class="qt">13. <span class="en">If it rains, we ___ at home.</span></div><div class="opts" data-q="q13"><label><input type="radio" name="q13" value="a"><span>stayed</span></label><label><input type="radio" name="q13" value="b"><span>will stay</span></label><label><input type="radio" name="q13" value="c"><span>stay</span></label></div></div>
+    <div class="q"><div class="qt">12. <span class="en">She is taller ___ her brother.</span></div><div class="opts" data-q="q11"><label><input type="radio" name="q11" value="a"><span>then</span></label><label><input type="radio" name="q11" value="b"><span>that</span></label><label><input type="radio" name="q11" value="c"><span>than</span></label><label class="idk"><input type="radio" name="q11" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">13. <span class="en">I have lived here ___ 2018.</span></div><div class="opts" data-q="q12"><label><input type="radio" name="q12" value="a"><span>since</span></label><label><input type="radio" name="q12" value="b"><span>for</span></label><label><input type="radio" name="q12" value="c"><span>from</span></label><label class="idk"><input type="radio" name="q12" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">14. <span class="en">If it rains, we ___ at home.</span></div><div class="opts" data-q="q13"><label><input type="radio" name="q13" value="a"><span>stayed</span></label><label><input type="radio" name="q13" value="b"><span>will stay</span></label><label><input type="radio" name="q13" value="c"><span>stay</span></label><label class="idk"><input type="radio" name="q13" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">15. <span class="en">If I ___ you, I would call her.</span></div><div class="opts" data-q="q18"><label><input type="radio" name="q18" value="a"><span>was</span></label><label><input type="radio" name="q18" value="b"><span>were</span></label><label><input type="radio" name="q18" value="c"><span>am</span></label><label class="idk"><input type="radio" name="q18" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">16. <span class="en">By the time we arrived, the film ___.</span></div><div class="opts" data-q="q19"><label><input type="radio" name="q19" value="a"><span>started</span></label><label><input type="radio" name="q19" value="b"><span>has started</span></label><label><input type="radio" name="q19" value="c"><span>had started</span></label><label class="idk"><input type="radio" name="q19" value="x"><span>Я не знаю</span></label></div></div>
   </div>
 
   <div class="tip"><span class="e">🗣</span><div><b>Главное — не идеальная грамматика, а смелость говорить.</b> С AI-репетитором не стыдно ошибаться — он не оценивает и доступен 24/7. Так уходит языковой барьер.</div></div>
@@ -139,11 +143,12 @@
   <!-- ЧТЕНИЕ -->
   <div class="card">
     <div class="kicker">Шаг 4 · Reading · чтение</div>
-    <div class="hint">Прочитайте текст и ответьте на вопросы.</div>
+    <div class="hint">Прочитайте текст и ответьте. Не знаете — выбирайте «Я не знаю».</div>
     <div class="read">Anna is from Spain, but she lives in London now. She works in a small coffee shop near her house. She likes her job because she meets a lot of people. In the evening, she studies English online for thirty minutes.</div>
-    <div class="q"><div class="qt">14. Where does Anna live now?</div><div class="opts" data-q="q14"><label><input type="radio" name="q14" value="a"><span>In Spain</span></label><label><input type="radio" name="q14" value="b"><span>In London</span></label><label><input type="radio" name="q14" value="c"><span>Near the sea</span></label></div></div>
-    <div class="q"><div class="qt">15. Why does she like her job?</div><div class="opts" data-q="q15"><label><input type="radio" name="q15" value="a"><span>It is easy</span></label><label><input type="radio" name="q15" value="b"><span>She meets a lot of people</span></label><label><input type="radio" name="q15" value="c"><span>It pays well</span></label></div></div>
-    <div class="q"><div class="qt">16. How long does she study English in the evening?</div><div class="opts" data-q="q16"><label><input type="radio" name="q16" value="a"><span>One hour</span></label><label><input type="radio" name="q16" value="b"><span>Ten minutes</span></label><label><input type="radio" name="q16" value="c"><span>Thirty minutes</span></label></div></div>
+    <div class="q"><div class="qt">17. Where does Anna live now?</div><div class="opts" data-q="q14"><label><input type="radio" name="q14" value="a"><span>In Spain</span></label><label><input type="radio" name="q14" value="b"><span>In London</span></label><label><input type="radio" name="q14" value="c"><span>Near the sea</span></label><label class="idk"><input type="radio" name="q14" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">18. Why does she like her job?</div><div class="opts" data-q="q15"><label><input type="radio" name="q15" value="a"><span>It is easy</span></label><label><input type="radio" name="q15" value="b"><span>She meets a lot of people</span></label><label><input type="radio" name="q15" value="c"><span>It pays well</span></label><label class="idk"><input type="radio" name="q15" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">19. How long does she study English in the evening?</div><div class="opts" data-q="q16"><label><input type="radio" name="q16" value="a"><span>One hour</span></label><label><input type="radio" name="q16" value="b"><span>Ten minutes</span></label><label><input type="radio" name="q16" value="c"><span>Thirty minutes</span></label><label class="idk"><input type="radio" name="q16" value="x"><span>Я не знаю</span></label></div></div>
+    <div class="q"><div class="qt">20. <span class="en">Is the coffee shop far from her house?</span></div><div class="opts" data-q="q20"><label><input type="radio" name="q20" value="a"><span>Yes, very far</span></label><label><input type="radio" name="q20" value="b"><span>No, it is near her house</span></label><label><input type="radio" name="q20" value="c"><span>We don't know</span></label><label class="idk"><input type="radio" name="q20" value="x"><span>Я не знаю</span></label></div></div>
   </div>
 
   <!-- САМООЦЕНКА -->
@@ -165,13 +170,13 @@
   <div class="tip"><span class="e">✈️</span><div>Представьте: в поездке вы <b>сами</b> спрашиваете дорогу и понимаете ответ, знакомитесь с людьми — без переводчика. Английский открывает двери.</div></div>
 
   <button type="submit" class="btn">Узнать свой уровень</button>
-  <div class="err" id="err">Пожалуйста, ответьте на все вопросы теста (шаги 2–4).</div>
+  <div class="err" id="err">Пожалуйста, ответьте на все вопросы (где не знаете — выберите «Я не знаю»).</div>
   </form>
 
   <!-- РЕЗУЛЬТАТ -->
   <div id="result">
     <div class="card" style="padding:0;overflow:hidden;">
-      <div class="lvl"><div class="big" id="rLevel">A1</div><div class="nm" id="rName">Начальный уровень</div><div class="sc" id="rScore">Правильных ответов: 0 из 16</div></div>
+      <div class="lvl"><div class="big" id="rLevel">A1</div><div class="nm" id="rName">Начальный уровень</div><div class="sc" id="rScore">Правильных ответов: 0 из 20</div></div>
       <div style="padding:24px 26px;">
         <div class="kicker">Разбор по навыкам</div>
         <div class="bars" id="rBars"></div>
@@ -189,9 +194,10 @@
 </div>
 
 <script>
-  // ===== Ключи ответов (16 заданий) =====
-  var KEY = {q1:'b',q2:'c',q3:'c',q4:'b',q5:'d',  q6:'b',q7:'b',q8:'a',q9:'c',q10:'a',q11:'c',q12:'a',q13:'b',  q14:'b',q15:'b',q16:'c'};
-  var SECTIONS = {Словарь:['q1','q2','q3','q4','q5'],Грамматика:['q6','q7','q8','q9','q10','q11','q12','q13'],Чтение:['q14','q15','q16']};
+  // ===== Ключи ответов (20 заданий) =====
+  var KEY = {q1:'b',q2:'c',q3:'c',q4:'b',q5:'d',q17:'b',  q6:'b',q7:'b',q8:'a',q9:'c',q10:'a',q11:'c',q12:'a',q13:'b',q18:'b',q19:'c',  q14:'b',q15:'b',q16:'c',q20:'b'};
+  var SECTIONS = {Словарь:['q1','q2','q3','q4','q5','q17'],Грамматика:['q6','q7','q8','q9','q10','q11','q12','q13','q18','q19'],Чтение:['q14','q15','q16','q20']};
+  var TOTAL_Q = 20;
 
   // TODO: для отправки результата диагносту вставьте сюда endpoint Google Apps Script / CRM (см. инструкцию)
   var RESULT_ENDPOINT = "";
@@ -200,7 +206,7 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var data = new FormData(form);
-    // проверка: имя, телефон и все 16 тест-вопросов отвечены
+    // проверка: на все тест-вопросы выбран хоть какой-то вариант (в т.ч. «Я не знаю»)
     var ok = true;
     for (var q in KEY){ if(!data.get(q)) ok=false; }
     if(!ok){ document.getElementById('err').style.display='block'; return; }
@@ -209,14 +215,14 @@
     for (var s in SECTIONS){ sec[s]=0; SECTIONS[s].forEach(function(q){ if(data.get(q)===KEY[q]){ sec[s]++; total++; } }); }
 
     var lvl, nm, reco;
-    if(total<=4){ lvl='A0'; nm='Старт с нуля'; reco='Отличная новость: вы начинаете с чистого листа — а наша методика как раз сильна именно для старта с нуля. На пробном уроке методолог покажет, с чего начать, чтобы вы заговорили, а не «учили правила».'; }
-    else if(total<=7){ lvl='A1'; nm='Начальный (Elementary)'; reco='У вас есть база из отдельных слов и простых фраз. Дальше — системно собрать грамматику и, главное, разговорную практику. Методолог на пробном покажет, как закрыть пробелы и быстрее выйти на речь.'; }
-    else if(total<=11){ lvl='A2'; nm='Базовый (Pre-Intermediate)'; reco='Хорошая база! Вы понимаете простые тексты и строите предложения. Сейчас ключевое — разговорная беглость и аудирование. На пробном подберём план, чтобы вы «разговорились» и перестали стесняться.'; }
+    if(total<=5){ lvl='A0'; nm='Старт с нуля'; reco='Отличная новость: вы начинаете с чистого листа — а наша методика как раз сильна именно для старта с нуля. На пробном уроке методолог покажет, с чего начать, чтобы вы заговорили, а не «учили правила».'; }
+    else if(total<=10){ lvl='A1'; nm='Начальный (Elementary)'; reco='У вас есть база из отдельных слов и простых фраз. Дальше — системно собрать грамматику и, главное, разговорную практику. Методолог на пробном покажет, как закрыть пробелы и быстрее выйти на речь.'; }
+    else if(total<=15){ lvl='A2'; nm='Базовый (Pre-Intermediate)'; reco='Хорошая база! Вы понимаете простые тексты и строите предложения. Сейчас ключевое — разговорная беглость и аудирование. На пробном подберём план, чтобы вы «разговорились» и перестали стесняться.'; }
     else { lvl='B1+'; nm='Средний (Intermediate)'; reco='Сильный результат! У вас уже уверенная база. Дальше — беглость, расширение словаря и свободный разговор на любые темы. Методолог покажет, как выйти на свободное общение.'; }
 
     document.getElementById('rLevel').textContent=lvl;
     document.getElementById('rName').textContent=nm;
-    document.getElementById('rScore').textContent='Правильных ответов: '+total+' из 16';
+    document.getElementById('rScore').textContent='Правильных ответов: '+total+' из '+TOTAL_Q;
     var bars=''; for(var s in SECTIONS){ var max=SECTIONS[s].length, pct=Math.round(sec[s]/max*100);
       bars+='<div class="bar"><div class="l"><span>'+s+'</span><span>'+sec[s]+'/'+max+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%"></div></div></div>'; }
     document.getElementById('rBars').innerHTML=bars;
